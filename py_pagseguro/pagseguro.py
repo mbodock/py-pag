@@ -25,7 +25,7 @@ class PagSeguroTransaction(PagSeguroBase):
         'request_redirect': 'https://pagseguro.uol.com.br/v2/checkout/payment.html?code={code}',
     }
 
-    def __init__(self, token, email, reference, item=None):
+    def __init__(self, token, email, reference=None, item=None):
         self.item = item
         self.reference = reference
         self.sender = None
@@ -38,6 +38,9 @@ class PagSeguroTransaction(PagSeguroBase):
             self.reference = reference
 
         super(PagSeguroTransaction, self).__init__(token, email)
+
+    def set_item(self, item):
+        self.item = item
 
     def get_reference(self):
         return self.reference
@@ -56,7 +59,7 @@ class PagSeguroTransaction(PagSeguroBase):
 
     def get_checkout_url(self):
         response = requests.post(self.URLS['request'], data=self.get_dados(), headers=self.headers)
-        soup = BeautifulSoup(response.content)
+        soup = BeautifulSoup(response.content, 'html.parser')
         if soup.body.p is not None and str(soup.body.p.string) == u'Unauthorized':
             raise UnauthorizedException(u'invalid Token ou E-mail')
         if soup.body.errors is not None:
@@ -82,12 +85,14 @@ class PagSeguroTransaction(PagSeguroBase):
             'token': self.token,
             'email': self.email,
             'currency': 'BRL',
-            'itemId1': self.item['id'],
-            'itemDescription1': self.item['description'],
-            'itemAmount1': "{0:.2f}".format(round(self.item['amount'], 2)),
-            'itemQuantity1': self.item['quantity'],
             'reference': self.reference,
         }
+
+        if self.item:
+            data['itemId1'] = self.item['id'],
+            data['itemDescription1'] = self.item['description'],
+            data['itemAmount1'] = "{0:.2f}".format(round(self.item['amount'], 2)),
+            data['itemQuantity1'] = self.item['quantity'],
         if self.sender:
             data['senderEmail'] = self.sender['email'],
             data['senderName'] = self.sender['name'],
