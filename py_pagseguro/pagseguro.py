@@ -151,11 +151,8 @@ class PagSeguroSignature(PagSeguroTransaction):
         return data
 
     def _set_end_date(self):
-        now = arrow.now().datetime
-        try:
-            next_year = now.replace(year=now.year + 1)
-        except ValueError:
-            next_year = now.replace(year=now.year + 1, day=28)
+        now = arrow.now()
+        next_year = now.replace(years=+1).datetime
         next_year_iso = next_year.isoformat()
         self.end_date = next_year_iso[:-13] + next_year_iso[-6:]
 
