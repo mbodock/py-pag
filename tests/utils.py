@@ -12,6 +12,7 @@ def post_fake(*args, **kwargs):
             </checkout>
         </body>
         """
+        status_code = 200
     return ResponseFake()
 
 def post_fake_without_code(*args, **kwargs):
@@ -25,6 +26,7 @@ def post_fake_without_code(*args, **kwargs):
             </checkout>
         </body>
         """
+        status_code = 200
     return ResponseFake()
 
 def post_fake_fail(*args, **kwargs):
@@ -45,6 +47,7 @@ def post_fake_fail(*args, **kwargs):
             </errors>
         </body>
         """
+        status_code = 400
     return ResponseFake()
 
 def post_fake_unauthorized(*args, **kwargs):
@@ -55,11 +58,13 @@ def post_fake_unauthorized(*args, **kwargs):
             <p>Unauthorized</p>
         </body>
         """
+        status_code = 401
     return ResponseFake()
 
 def get_fake_notification_not_found(*args, **kwargs):
     class ResponseFake(object):
         content = "<p>Not Found</p>"
+        status_code = 404
     return ResponseFake()
 
 def get_fake_notification(*args, **kwargs):
@@ -127,6 +132,7 @@ def get_fake_notification(*args, **kwargs):
         </discountamount></discountamount></transaction>
         </body>
         """
+        status_code = 200
     return ResponseFake()
 
 def get_fake_signature_notification(*args, **kwargs):
@@ -165,6 +171,7 @@ def get_fake_signature_notification(*args, **kwargs):
             </preApproval>
         </body>
         """
+        status_code = 200
     return ResponseFake()
 
 
@@ -180,6 +187,7 @@ def get_fake_charger(*args, **kwargs):
             </result>
         </body>
         """
+        status_code = 200
     return ResponseFake()
 
 def get_fake_charger_error(*args, **kwargs):
@@ -199,5 +207,5 @@ def get_fake_charger_error(*args, **kwargs):
             </errors>
         </body>
         """
+        status_code = 400
     return ResponseFake()
-

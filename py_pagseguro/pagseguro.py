@@ -59,9 +59,9 @@ class PagSeguroTransaction(PagSeguroBase):
 
     def get_checkout_url(self):
         response = requests.post(self.URLS['request'], data=self.get_dados(), headers=self.headers)
-        soup = BeautifulSoup(response.content, 'html.parser')
-        if soup.body.p is not None and str(soup.body.p.string) == u'Unauthorized':
+        if response.status_code == 401:
             raise UnauthorizedException(u'invalid Token ou E-mail')
+        soup = BeautifulSoup(response.content, 'html.parser')
         if soup.body.errors is not None:
             code = str(soup.body.errors.error.code.string)
             message = str(soup.body.errors.error.message.string)
@@ -273,7 +273,7 @@ class PagSeguroAbstractResponse(object):
     """ Abstract class for a PagSeguro Response """
 
     def __init__(self):
-        raise NotImplementedError # pragma: no cover
+        raise NotImplementedError  # pragma: no cover
 
     def format_sender_data(self, sender_soup):
         sender = {}
@@ -357,10 +357,10 @@ class PagSeguroSignatureCharger(PagSeguroTransaction):
 
     def charge(self):
         response = requests.post(self.URLS['payment'], data=self.get_data(), headers=self.headers)
-        soup = BeautifulSoup(response.content)
-        if soup.body.p is not None and str(soup.body.p.string) == u'Unauthorized':
+        if response.status_code == 401:
             raise UnauthorizedException(u'invalid Token ou E-mail')
-        elif soup.body.errors is not None:
+        soup = BeautifulSoup(response.content)
+        if soup.body.errors is not None:
             code = str(soup.body.errors.error.code.string)
             message = str(soup.body.errors.error.message.string)
             raise ApiErrorException('{code} - {message}'.format(code=code, message=message))
