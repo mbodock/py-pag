@@ -165,9 +165,9 @@ class PagSeguroSender(object):
             raise ValueError('Invalid DDD')
         if phone and (len(phone) < 7 or len(phone) > 9):
             raise ValueError('Invalid phone')
-        if city and len(ddd) > 60:
+        if city and len(city) > 60:
             raise ValueError('Invalid city name')
-        if uf and len(ddd) is not 2:
+        if uf and len(uf) is not 2:
             raise ValueError('Invalid UF')
 
         self.name = name
@@ -188,6 +188,9 @@ class PagSeguroSender(object):
             'senderAddressState': self.uf,
             'senderAddressCountry': self.country
         }
+
+    def get_dados(self):
+        return self.__dict__()
 
 
 class PagSeguroNotificationHandler(PagSeguroBase):
