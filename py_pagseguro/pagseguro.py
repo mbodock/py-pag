@@ -273,7 +273,7 @@ class PagSeguroAbstractResponse(object):
     """ Abstract class for a PagSeguro Response """
 
     def __init__(self):
-        raise NotImplementedError
+        raise NotImplementedError # pragma: no cover
 
     def format_sender_data(self, sender_soup):
         sender = {}

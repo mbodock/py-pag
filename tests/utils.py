@@ -65,6 +65,8 @@ def get_fake_notification_not_found(*args, **kwargs):
 def get_fake_notification(*args, **kwargs):
     class ResponseFake(object):
         content = """
+        <head></head>
+        <body>
         <!--?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?-->
         <transaction>
             <date>2011-02-10T16:13:41.000-03:00</date>
@@ -123,12 +125,15 @@ def get_fake_notification(*args, **kwargs):
                 <cost>21.50</cost>
             </shipping>
         </discountamount></discountamount></transaction>
+        </body>
         """
     return ResponseFake()
 
 def get_fake_signature_notification(*args, **kwargs):
     class ResponseFake(object):
         content = """
+        <head></head>
+        <body>
             <!--?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?-->
             <preApproval>
                 <name>Seguro contra roubo do Notebook Prata</name>
@@ -158,5 +163,41 @@ def get_fake_signature_notification(*args, **kwargs):
                     </address>
                     </sender>
             </preApproval>
+        </body>
         """
     return ResponseFake()
+
+
+def get_fake_charger(*args, **kwargs):
+    class ResponseFake(object):
+        content = """
+        <head></head>
+        <body>
+            <!--?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?-->
+            <result>
+            <transactionCode>D9AD1EA3DEB544A6A413E33BD4822225</transactionCode>
+            <date>2011-08-19T14:47:59.000-03:00</date>
+            </result>
+        </body>
+        """
+    return ResponseFake()
+
+def get_fake_charger_error(*args, **kwargs):
+    class ResponseFake(object):
+        content = """
+        <head></head>
+        <body>
+            <errors>
+            <error>
+            <code>11004</code>
+            <message>Currency is required.</message>
+            </error>
+            <error>
+            <code>11005</code>
+            <message>Currency invalid value: ValorCurrencyInvalido</message>
+            </error>
+            </errors>
+        </body>
+        """
+    return ResponseFake()
+
