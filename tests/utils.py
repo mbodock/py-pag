@@ -125,3 +125,38 @@ def get_fake_notification(*args, **kwargs):
         </discountamount></discountamount></transaction>
         """
     return ResponseFake()
+
+def get_fake_signature_notification(*args, **kwargs):
+    class ResponseFake(object):
+        content = """
+            <!--?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?-->
+            <preApproval>
+                <name>Seguro contra roubo do Notebook Prata</name>
+                <code>C08984179E9EDF3DD4023F87B71DE349</code>
+                <date>2011-11-23T13:40:23.000-02:00</date>
+                <tracker>538C53</tracker>
+                <status>ACTIVE</status>
+                <reference>REF1234</reference>
+                <lastEventDate>2011-11-25T20:04:23.000-02:00</lastEventDate>
+                <charge>auto</charge>
+                    <sender>
+                    <name>Comprador Istambul</name>
+                    <email>c@i.com</email>
+                    <phone>
+                    <areaCode>11</areaCode>
+                    <number>30389678</number>
+                    </phone>
+                    <address>
+                    <street>ALAMEDA ITU</street>
+                    <number>78</number>
+                    <complement>ap. 2601</complement>
+                    <district>Jardim Paulista</district>
+                    <city>SAO PAULO</city>
+                    <state>SP</state>
+                    <country>BRASIL</country>
+                    <postalCode>01421000</postalCode>
+                    </address>
+                    </sender>
+            </preApproval>
+        """
+    return ResponseFake()
