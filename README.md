@@ -16,6 +16,10 @@ Use o seguinte comando para instalar:
 
 ## Começando
 
+Abaixo a descrição de algumas classes e suas funções
+
+### Transação simples
+
 Iniciando uma compra de produto pontual
 
 ```python
@@ -39,6 +43,8 @@ transaction.set_item(item)
 url = transaction.get_checkout_url()
 ```
 
+### Criando uma assinatura
+
 Para iniciar uma assinatura no pagseguro use:
 
 
@@ -55,10 +61,14 @@ transaction = PagSeguroSignature('sua_token', 'seu_email', 'nome da asisnatura',
 url = transaction.get_checkout_url()
 ```
 
+### Recebendo notificaçoes
+
 Após qualquer uma das ações acima o pagseguro irá processar e lhe enviar(POST) uma notificação.
 A notificação do pagseguro é um post contendo `notificationCode` e `notificationType`.
 
 O `notificationType` pode ser Transaction ou Preapproval, para vendas simples e assinaturas respectivamente.
+
+##### Notificação de transição
 
 Caso seja uma Transaction use:
 
@@ -75,9 +85,9 @@ response = handler.get_notification_response()
 response.status  # 'Paga'
 ```
 
+##### Notificação de assinatura
 
 Caso seja uma assinatura use:
-
 
 ```python
 from py_pag import PagSeguroNotificationSignatureHandler
@@ -92,6 +102,8 @@ if response.status.lower() == 'active':  # 3 estados possíveis: INITIATED, PEND
     # Faça a cobrança, veja abaixo usando o response.code
     # Para mais de uma cobrança salve o response.code em seu banco de dados
 ```
+
+### Efetuando cobranças
 
 Uma vez que sua assinatura já está ativa podemos começar a fazer as cobranças de acordo com a periodicidade acordada:
 
