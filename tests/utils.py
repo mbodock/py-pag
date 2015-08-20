@@ -57,4 +57,71 @@ def post_fake_unauthorized(*args, **kwargs):
         """
     return ResponseFake()
 
+def get_fake_notification_not_found(*args, **kwargs):
+    class ResponseFake(object):
+        content = "<p>Not Found</p>"
+    return ResponseFake()
 
+def get_fake_notification(*args, **kwargs):
+    class ResponseFake(object):
+        content = """
+        <!--?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?-->
+        <transaction>
+            <date>2011-02-10T16:13:41.000-03:00</date>
+            <code>9E884542-81B3-4419-9A75-BCC6FB495EF1</code>
+            <reference>REF1234</reference>
+            <type>1</type>
+            <status>3</status>
+            <paymentmethod>
+                <type>1</type>
+                <code>101</code>
+            </paymentmethod>
+            <grossamount>49900.00</grossamount>
+            <discountamount>0.00<discountamount>
+            <creditorfees>
+                <intermediationrateamount>0.40</intermediationrateamount>
+                <intermediationfeeamount>1644.80</intermediationfeeamount>
+            </creditorfees>
+            <netamount>49900.00</netamount>
+            <extraamount>0.00</extraamount>
+            <installmentcount>1</installmentcount>
+            <itemcount>2</itemcount>
+            <items>
+                <item>
+                    <id>0001</id>
+                    <description>Notebook Prata</description>
+                    <quantity>1</quantity>
+                    <amount>24300.00</amount>
+                </item>
+                <item>
+                    <id>0002</id>
+                    <description>Notebook Rosa</description>
+                    <quantity>1</quantity>
+                    <amount>25600.00</amount>
+                </item>
+            </items>
+            <sender>
+                <name>José Comprador</name>
+                <email>comprador@uol.com.br</email>
+                <phone>
+                    <areacode>11</areacode>
+                    <number>56273440</number>
+                </phone>
+            </sender>
+            <shipping>
+                <address>
+                    <street>Av. Brig. Faria Lima</street>
+                    <number>1384</number>
+                    <complement>5o andar</complement>
+                    <district>Jardim Paulistano</district>
+                    <postalcode>01452002</postalcode>
+                    <city>Sao Paulo</city>
+                    <state>SP</state>
+                    <country>BRA</country>
+                </address>
+                <type>1</type>
+                <cost>21.50</cost>
+            </shipping>
+        </discountamount></discountamount></transaction>
+        """
+    return ResponseFake()

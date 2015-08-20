@@ -199,6 +199,8 @@ class PagSeguroNotificationHandler(PagSeguroBase):
     }
 
     def __init__(self, token, email, code):
+        if not code:
+            raise ValueError("No code provided")
         self.code = code
         super(PagSeguroNotificationHandler, self).__init__(token, email)
 
@@ -214,16 +216,14 @@ class PagSeguroNotificationHandler(PagSeguroBase):
     def get_check_notification_url(self):
         return self.URLS['check_notification'].format(code=self.code, email=self.email, token=self.token)
 
-    def get_notification_info(self):
-        if not self.code:
-            raise RuntimeError("No code provided, try get_check_notification_url the url first")
+    def _get_notification_info(self):
         notification_url = self.get_check_notification_url()
         response = requests.get(notification_url, headers=self.headers)
         self.notification_response = response.content
         return self.notification_response
 
     def get_notification_response(self):
-        soup = BeautifulSoup(self.get_notification_info())
+        soup = BeautifulSoup(self._get_notification_info())
         self._valid_notification(soup)
 
         pagseguro_response = PagSeguroNotificationResponse(
@@ -245,7 +245,7 @@ class PagSeguroNotificationSignatureHandler(PagSeguroNotificationHandler):
     }
 
     def get_signature_notification_info(self):
-        soup = BeautifulSoup(self.get_notification_info())
+        soup = BeautifulSoup(self._get_notification_info())
         self._valid_notification(soup)
 
         self.data = soup.find('preapproval')
@@ -300,7 +300,7 @@ class PagSeguroSignatureResponse(PagSeguroAbstractResponse):
 
 class PagSeguroNotificationResponse(PagSeguroAbstractResponse):
     STATUS = {
-        1: u'Aguardadno pagamento',
+        1: u'Aguardando pagamento',
         2: u'Em análise',
         3: u'Paga',
         4: u'Disponível',
