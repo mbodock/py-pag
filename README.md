@@ -1,8 +1,8 @@
-# Py-Pagseguro
+# Py-Pag
 
-O py-pagseguro é uma pequena lib construída para facilitar a integraçaõ de assinaturas manuais no [PagSeguro](pagseguro.uol.com.br).
+O py-pag é uma pequena lib construída para facilitar a integraçaõ de assinaturas manuais no [PagSeguro](pagseguro.uol.com.br).
 
-O Py-Pagseguro depende:
+O Py-Pag depende:
 * arrow
 * BeautifulSoup4
 * requests
@@ -12,14 +12,14 @@ O Py-Pagseguro depende:
 
 Use o seguinte comando para instalar:
 
-`pip install py-pagseguro`
+`pip install py_pag`
 
 ## Começando
 
 Iniciando uma compra de produto pontual
 
 ```python
-from py-pagseguro import PagSeguroTransaction
+from py_pag import PagSeguroTransaction
 
 # Abaixo crie um objecto de transação
 transaction = PagSeguroTransaction('sua_token', 'seu_email', reference='Referencia de seu sistema')
@@ -43,7 +43,7 @@ Para iniciar uma assinatura no pagseguro use:
 
 
 ```python
-from py-pagseguro import PagSeguroSignature
+from py_pag import PagSeguroSignature
 
 # Abaixo crie um objecto de transação
 transaction = PagSeguroSignature('sua_token', 'seu_email', 'nome da asisnatura', 'descricao', price=3.14, reference='Referencia de seu sistema')
@@ -63,7 +63,7 @@ O `notificationType` pode ser Transaction ou Preapproval, para vendas simples e 
 Caso seja uma Transaction use:
 
 ```python
-from py-pagseguro import PagSeguroNotificationHandler
+from py_pag import PagSeguroNotificationHandler
 
 # Instancie o handler passando o código recebido pelo pagseguro.
 handler = PagSeguroNotificationHandler('sua_token', 'seu_email', 'notificationCode')
@@ -80,7 +80,7 @@ Caso seja uma assinatura use:
 
 
 ```python
-from py-pagseguro import PagSeguroNotificationSignatureHandler
+from py_pag import PagSeguroNotificationSignatureHandler
 
 # Instancie o handler passando o código recebido pelo pagseguro.
 handler = PagSeguroNotificationSignatureHandler('sua_token', 'seu_email', 'notificationCode')
@@ -97,7 +97,7 @@ Uma vez que sua assinatura já está ativa podemos começar a fazer as cobrança
 
 
 ```python
-from py-pagseguro import PagSeguroSignatureCharger
+from py_pag import PagSeguroSignatureCharger
 
 # Itens a serem cobrados
 items = [{
