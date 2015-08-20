@@ -1,6 +1,6 @@
 # Py-Pag
 
-O py-pag é uma pequena lib construída para facilitar a integraçaõ de assinaturas manuais no [PagSeguro](pagseguro.uol.com.br).
+O py-pag é uma pequena lib construída para facilitar a integração de assinaturas manuais no [PagSeguro](pagseguro.uol.com.br).
 
 O Py-Pag depende:
 * arrow
