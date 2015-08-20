@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='py-pagseguro',
+    name='py-pag',
     version='0.1.0',
     description='PagSeguro lib that suports manual subscriptions',
     url='',

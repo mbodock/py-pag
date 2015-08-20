@@ -2,8 +2,8 @@
 
 import mock
 
-from py_pagseguro.pagseguro import PagSeguroTransaction
-from py_pagseguro.exceptions import ApiErrorException, UnauthorizedException
+from py_pag.pagseguro import PagSeguroTransaction
+from py_pag.exceptions import ApiErrorException, UnauthorizedException
 
 from .base_test_case import BaseTestCase
 from .utils import *

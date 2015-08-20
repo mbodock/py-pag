@@ -2,8 +2,8 @@
 
 import mock
 
-from py_pagseguro.pagseguro import PagSeguroNotificationHandler
-from py_pagseguro.exceptions import ApiErrorException, NotificationNotFoundException
+from py_pag.pagseguro import PagSeguroNotificationHandler
+from py_pag.exceptions import ApiErrorException, NotificationNotFoundException
 
 from .base_test_case import BaseTestCase
 from .utils import *
