@@ -128,3 +128,9 @@ charger = PagSeguroSignatureCharger('sua_token', 'seu_email', 'codigo_da_assinat
 # Esta notificação será uma transação normal.
 codigo_da_operacao, data = charger.charge()
 ```
+
+
+## Implementações futuras
+
+* Alterar PagSeguroTransaction para trabalhar com multiplos produtos.
+* Criar documentação sobre url_redirect e outras opções. 
