@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='py-pag',
-    version='0.1.0',
+    version='0.1.1',
     description='PagSeguro lib that suports manual subscriptions',
     long_description='''
         O py-pag é uma pequena lib construída para facilitar a integração de assinaturas manuais no PagSeguro.
