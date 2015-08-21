@@ -3,10 +3,14 @@
 O py-pag é uma pequena lib construída para facilitar a integração de assinaturas manuais no [PagSeguro](pagseguro.uol.com.br).
 
 O Py-Pag depende:
+
 * arrow
 * BeautifulSoup4
 * requests
 * Unidecode
+
+> Todos instalados automaticamente.
+
 
 ## Instalando
 
@@ -14,9 +18,11 @@ Use o seguinte comando para instalar:
 
 `pip install py_pag`
 
+
 ## Começando
 
 Abaixo a descrição de algumas classes e suas funções
+
 
 ### Transação simples
 
@@ -43,6 +49,7 @@ transaction.set_item(item)
 url = transaction.get_checkout_url()
 ```
 
+
 ### Criando uma assinatura
 
 Para iniciar uma assinatura no pagseguro use:
@@ -61,12 +68,14 @@ transaction = PagSeguroSignature('sua_token', 'seu_email', 'nome da asisnatura',
 url = transaction.get_checkout_url()
 ```
 
+
 ### Recebendo notificaçoes
 
 Após qualquer uma das ações acima o pagseguro irá processar e lhe enviar(POST) uma notificação.
 A notificação do pagseguro é um post contendo `notificationCode` e `notificationType`.
 
 O `notificationType` pode ser Transaction ou Preapproval, para vendas simples e assinaturas respectivamente.
+
 
 ##### Notificação de transição
 
@@ -85,6 +94,7 @@ response = handler.get_notification_response()
 response.status  # 'Paga'
 ```
 
+
 ##### Notificação de assinatura
 
 Caso seja uma assinatura use:
@@ -102,6 +112,7 @@ if response.status.lower() == 'active':  # 3 estados possíveis: INITIATED, PEND
     # Faça a cobrança, veja abaixo usando o response.code
     # Para mais de uma cobrança salve o response.code em seu banco de dados
 ```
+
 
 ### Efetuando cobranças
 
@@ -130,7 +141,15 @@ codigo_da_operacao, data = charger.charge()
 ```
 
 
+## Executando os testes
+
+* Clone o repositório.
+* Entre na pasta raiz e instale as dependências de dev: `pip install -r requirements-dev.txt`.
+* Para rodar os testes: `py.test`.
+* Para obter o coverage: `py.test --cov`
+
+
 ## Implementações futuras
 
 * Alterar PagSeguroTransaction para trabalhar com multiplos produtos.
-* Criar documentação sobre url_redirect e outras opções. 
+* Criar documentação sobre url_redirect e outras opções.
