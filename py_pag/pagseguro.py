@@ -62,9 +62,9 @@ class PagSeguroTransaction(PagSeguroBase):
         if response.status_code == 401:
             raise UnauthorizedException(u'invalid Token ou E-mail')
         soup = BeautifulSoup(response.content, 'html.parser')
-        if soup.body.errors is not None:
-            code = str(soup.body.errors.error.code.string)
-            message = str(soup.body.errors.error.message.string)
+        if response.status_code == 400:
+            code = str(soup.errors.error.code.string)
+            message = str(soup.errors.error.message.string)
             raise ApiErrorException('{code} - {message}'.format(code=code, message=message))
         code = self.get_code(soup)
         return self.URLS['request_redirect'].format(code=code)
@@ -209,8 +209,8 @@ class PagSeguroNotificationHandler(PagSeguroBase):
             raise NotificationNotFoundException('Notification not found')
 
         if soup.find('error'):
-            code = str(soup.body.errors.error.code.string)
-            message = str(soup.body.errors.error.message.string)
+            code = str(soup.errors.error.code.string)
+            message = str(soup.errors.error.message.string)
             raise ApiErrorException('{code} - {message}'.format(code=code, message=message))
 
     def get_check_notification_url(self):
@@ -360,9 +360,9 @@ class PagSeguroSignatureCharger(PagSeguroTransaction):
         if response.status_code == 401:
             raise UnauthorizedException(u'invalid Token ou E-mail')
         soup = BeautifulSoup(response.content)
-        if soup.body.errors is not None:
-            code = str(soup.body.errors.error.code.string)
-            message = str(soup.body.errors.error.message.string)
+        if response.status_code == 400:
+            code = str(soup.errors.error.code.string)
+            message = str(soup.errors.error.message.string)
             raise ApiErrorException('{code} - {message}'.format(code=code, message=message))
 
         return (soup.transactionCode, soup.date)

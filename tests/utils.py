@@ -3,14 +3,11 @@
 def post_fake(*args, **kwargs):
     class ResponseFake(object):
         content = """
-        <head></head>
-        <body>
-            <?xml version="1.0" encoding="ISO-8859-1"?>  
-            <checkout>  
-                <code>8CF4BE7DCECEF0F004A6DFA0A8243412</code>  
-                <date>2010-12-02T10:11:28.000-02:00</date>  
-            </checkout>
-        </body>
+        <?xml version="1.0" encoding="ISO-8859-1"?>  
+        <checkout>  
+            <code>8CF4BE7DCECEF0F004A6DFA0A8243412</code>  
+            <date>2010-12-02T10:11:28.000-02:00</date>  
+        </checkout>
         """
         status_code = 200
     return ResponseFake()
@@ -18,13 +15,10 @@ def post_fake(*args, **kwargs):
 def post_fake_without_code(*args, **kwargs):
     class ResponseFake(object):
         content = """
-        <head></head>
-        <body>
-            <?xml version="1.0" encoding="ISO-8859-1"?>  
-            <checkout>  
-                <date>2010-12-02T10:11:28.000-02:00</date>  
-            </checkout>
-        </body>
+        <?xml version="1.0" encoding="ISO-8859-1"?>  
+        <checkout>  
+            <date>2010-12-02T10:11:28.000-02:00</date>  
+        </checkout>
         """
         status_code = 200
     return ResponseFake()
@@ -32,20 +26,17 @@ def post_fake_without_code(*args, **kwargs):
 def post_fake_fail(*args, **kwargs):
     class ResponseFake(object):
         content = """
-        <head></head>
-        <body>
-            <?xml version="1.0" encoding="ISO-8859-1"?>
-            <errors>
-                <error>
-                    <code>11004</code>
-                    <message>Currency is required.</message>
-                </error>
-                <error>
-                    <code>11005</code>
-                    <message>Currency invalid value: 100</message>
-                </error>
-            </errors>
-        </body>
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <errors>
+            <error>
+                <code>11004</code>
+                <message>Currency is required.</message>
+            </error>
+            <error>
+                <code>11005</code>
+                <message>Currency invalid value: 100</message>
+            </error>
+        </errors>
         """
         status_code = 400
     return ResponseFake()
@@ -53,10 +44,7 @@ def post_fake_fail(*args, **kwargs):
 def post_fake_unauthorized(*args, **kwargs):
     class ResponseFake(object):
         content = """
-        <head></head>
-        <body>
-            <p>Unauthorized</p>
-        </body>
+        <p>Unauthorized</p>
         """
         status_code = 401
     return ResponseFake()
@@ -70,8 +58,6 @@ def get_fake_notification_not_found(*args, **kwargs):
 def get_fake_notification(*args, **kwargs):
     class ResponseFake(object):
         content = """
-        <head></head>
-        <body>
         <!--?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?-->
         <transaction>
             <date>2011-02-10T16:13:41.000-03:00</date>
@@ -130,7 +116,6 @@ def get_fake_notification(*args, **kwargs):
                 <cost>21.50</cost>
             </shipping>
         </discountamount></discountamount></transaction>
-        </body>
         """
         status_code = 200
     return ResponseFake()
@@ -138,38 +123,35 @@ def get_fake_notification(*args, **kwargs):
 def get_fake_signature_notification(*args, **kwargs):
     class ResponseFake(object):
         content = """
-        <head></head>
-        <body>
-            <!--?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?-->
-            <preApproval>
-                <name>Seguro contra roubo do Notebook Prata</name>
-                <code>C08984179E9EDF3DD4023F87B71DE349</code>
-                <date>2011-11-23T13:40:23.000-02:00</date>
-                <tracker>538C53</tracker>
-                <status>ACTIVE</status>
-                <reference>REF1234</reference>
-                <lastEventDate>2011-11-25T20:04:23.000-02:00</lastEventDate>
-                <charge>auto</charge>
-                    <sender>
-                    <name>Comprador Istambul</name>
-                    <email>c@i.com</email>
-                    <phone>
-                    <areaCode>11</areaCode>
-                    <number>30389678</number>
-                    </phone>
-                    <address>
-                    <street>ALAMEDA ITU</street>
-                    <number>78</number>
-                    <complement>ap. 2601</complement>
-                    <district>Jardim Paulista</district>
-                    <city>SAO PAULO</city>
-                    <state>SP</state>
-                    <country>BRASIL</country>
-                    <postalCode>01421000</postalCode>
-                    </address>
-                    </sender>
-            </preApproval>
-        </body>
+        <!--?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?-->
+        <preApproval>
+            <name>Seguro contra roubo do Notebook Prata</name>
+            <code>C08984179E9EDF3DD4023F87B71DE349</code>
+            <date>2011-11-23T13:40:23.000-02:00</date>
+            <tracker>538C53</tracker>
+            <status>ACTIVE</status>
+            <reference>REF1234</reference>
+            <lastEventDate>2011-11-25T20:04:23.000-02:00</lastEventDate>
+            <charge>auto</charge>
+                <sender>
+                <name>Comprador Istambul</name>
+                <email>c@i.com</email>
+                <phone>
+                <areaCode>11</areaCode>
+                <number>30389678</number>
+                </phone>
+                <address>
+                <street>ALAMEDA ITU</street>
+                <number>78</number>
+                <complement>ap. 2601</complement>
+                <district>Jardim Paulista</district>
+                <city>SAO PAULO</city>
+                <state>SP</state>
+                <country>BRASIL</country>
+                <postalCode>01421000</postalCode>
+                </address>
+                </sender>
+        </preApproval>
         """
         status_code = 200
     return ResponseFake()
@@ -178,14 +160,11 @@ def get_fake_signature_notification(*args, **kwargs):
 def get_fake_charger(*args, **kwargs):
     class ResponseFake(object):
         content = """
-        <head></head>
-        <body>
-            <!--?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?-->
-            <result>
-            <transactionCode>D9AD1EA3DEB544A6A413E33BD4822225</transactionCode>
-            <date>2011-08-19T14:47:59.000-03:00</date>
-            </result>
-        </body>
+        <!--?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?-->
+        <result>
+        <transactionCode>D9AD1EA3DEB544A6A413E33BD4822225</transactionCode>
+        <date>2011-08-19T14:47:59.000-03:00</date>
+        </result>
         """
         status_code = 200
     return ResponseFake()
@@ -193,9 +172,7 @@ def get_fake_charger(*args, **kwargs):
 def get_fake_charger_error(*args, **kwargs):
     class ResponseFake(object):
         content = """
-        <head></head>
-        <body>
-            <errors>
+        <errors>
             <error>
             <code>11004</code>
             <message>Currency is required.</message>
@@ -204,8 +181,7 @@ def get_fake_charger_error(*args, **kwargs):
             <code>11005</code>
             <message>Currency invalid value: ValorCurrencyInvalido</message>
             </error>
-            </errors>
-        </body>
+        </errors>
         """
         status_code = 400
     return ResponseFake()
