@@ -1,8 +1,10 @@
 # encoding: utf-8
-import requests
-import arrow
-from uuid import uuid4
 
+import arrow
+import requests
+import re
+
+from uuid import uuid4
 from bs4 import BeautifulSoup
 from unidecode import unidecode
 
@@ -72,6 +74,7 @@ class PagSeguroTransaction(PagSeguroBase):
     def set_sender(self, email, name):
         if name:
             name = name[:49]
+            name = re.sub(' +', ' ', name)
         self.sender = {'email': email, 'name': name}
 
     def get_dados(self):
